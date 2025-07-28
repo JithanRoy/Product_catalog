@@ -8,6 +8,7 @@ interface FavoritesState {
   addToFavorites: (product: Product) => void;
   removeFromFavorites: (productId: number) => void;
   isFavorite: (productId: number) => boolean;
+  clearFavorites: () => void;
 }
 
 export const useFavoritesStore = create<FavoritesState>()(
@@ -21,9 +22,8 @@ export const useFavoritesStore = create<FavoritesState>()(
           favorites: state.favorites.filter((p) => p.id !== productId),
         })),
       isFavorite: (productId) => get().favorites.some((p) => p.id === productId),
+      clearFavorites: () => set({ favorites: [] })
     }),
-    {
-      name: 'favorites-storage',
-    }
+    { name: 'favorites-storage' }
   )
 );

@@ -4,7 +4,7 @@
 import { useState, useMemo, useEffect } from 'react';
 import { Product } from '@/types';
 import ProductCard from './ProductCard';
-import ProductCardSkeleton from './ProductCardSkeleton';
+import ProductCardSkeleton from '@/components/common/ProductCardSkeleton';
 
 interface ProductListProps {
   initialProducts: Product[];
@@ -35,7 +35,6 @@ export default function ProductList({ initialProducts }: ProductListProps) {
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {!isClient ? (
-          // Show 8 skeletons on initial server render and hydration
           Array.from({ length: 8 }).map((_, i) => <ProductCardSkeleton key={i} />)
         ) : (
           filteredProducts.map((product) => (

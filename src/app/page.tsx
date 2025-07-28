@@ -1,9 +1,8 @@
-// src/app/page.tsx
+
 import { getAllProducts } from "@/lib/api/products";
-import ProductList from "@/components/common/ProductList";
+import ProductList from "@/components/product/ProductList";
 
 export default async function HomePage() {
-  // Fetch data on the server
   const products = await getAllProducts();
 
   return (

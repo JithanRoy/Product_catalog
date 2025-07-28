@@ -1,4 +1,3 @@
-// src/store/authStore.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -22,7 +21,7 @@ export const useAuthStore = create<AuthState>()(
       },
     }),
     {
-      name: 'auth-storage', // The key in localStorage
+      name: 'auth-storage',
     }
   )
 );
