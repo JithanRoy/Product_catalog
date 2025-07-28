@@ -1,20 +1,16 @@
-// src/components/common/Header.tsx
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-// Zustand Stores
 import { useAuthStore } from '@/store/authStore';
 import { useFavoritesStore } from '@/store/favouritesStore';
 import { useCartStore } from '@/store/cartStore';
 
-// UI Components & Icons
 import { Button } from '@/components/ui/button';
-import { Heart, ShoppingCart, LogOut, User } from 'lucide-react';
+import { Heart, LogOut, User } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import CartSheet from "../cart/CartSheet";
 
-// A small component for the notification badge
 const IconBadge = ({ count }: { count: number }) => {
   if (count === 0) return null;
   return (
@@ -27,15 +23,12 @@ const IconBadge = ({ count }: { count: number }) => {
 export default function Header() {
   const router = useRouter();
 
-  // Select the state values
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const favoritesCount = useFavoritesStore((state: any) => state.favorites.length);
-  const cartCount = useCartStore((state) => state.items.length);
+  const favoritesCount = useFavoritesStore((state) => state.favorites.length);
 
-  // Select the ACTION FUNCTIONS without calling them
   const logout = useAuthStore((state) => state.logout);
-  const clearFavorites = useFavoritesStore((state: any) => state.clearFavorites); // <-- CORRECT: No parentheses
-  const clearCart = useCartStore((state) => state.clearCart);                 // <-- CORRECT: No parentheses
+  const clearFavorites = useFavoritesStore((state) => state.clearFavorites);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
@@ -44,16 +37,16 @@ export default function Header() {
 
   const handleLogout = () => {
     logout();
-    clearFavorites(); // Now this is a valid function call
-    clearCart();      // This is also a valid function call
-    router.push('/login'); // Redirect to login page for a better UX
+    clearFavorites();
+    clearCart();
+    router.push('/login');
   };
 
   return (
     <header className="bg-navy text-white shadow-md sticky top-0 z-50">
       <nav className="container mx-auto flex items-center justify-between p-4">
         <Link href="/" className="text-2xl font-bold text-teal-accent">
-          Productify
+          Product-Catalogue
         </Link>
         <div className="flex items-center gap-4">
           {isMounted && (

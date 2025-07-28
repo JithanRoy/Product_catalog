@@ -21,16 +21,10 @@ export default function LoginPage() {
 
     const onSubmit = async (data: LoginRequest) => {
       try {
-        // 1. Call the API
         const { token } = await loginUser(data);
-
-        // 2. THIS IS THE MOST IMPORTANT STEP
-        // It updates the global state and saves it to localStorage.
         login(token);
-
-        // 3. Redirect to the home page
         router.push('/');
-      } catch (error: any) {
+      } catch (error) {
         setError("root", { message: error.message || "Login failed." });
       }
     };

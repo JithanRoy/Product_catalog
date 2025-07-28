@@ -1,4 +1,3 @@
-// src/components/cart/CartSheet.tsx
 'use client';
 
 import Image from 'next/image';
@@ -15,9 +14,7 @@ import {
 } from '@/components/ui/sheet';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { ShoppingCart, Trash2, Plus, Minus } from 'lucide-react';
-import Link from "next/link";
 
-// Reusable Icon Badge from Header
 const IconBadge = ({ count }: { count: number }) => {
   if (count === 0) return null;
   return (
