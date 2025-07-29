@@ -1,4 +1,4 @@
-// src/components/product/ProductDetails.tsx
+
 'use client';
 
 import Link from 'next/link';
@@ -6,21 +6,17 @@ import Image from 'next/image';
 import { toast } from 'sonner';
 import { Product } from '@/types';
 
-// State Management
 import { useFavoritesStore } from '@/store/favouritesStore';
 import { useCartStore } from '@/store/cartStore';
 
-// UI Components & Icons
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Star, ShoppingCart, Heart } from 'lucide-react';
 
 export default function ProductDetails({ product }: { product: Product }) {
-  // Connect to the state stores
   const { favorites, addToFavorites, removeFromFavorites } = useFavoritesStore();
-  const { addToCart } = useCartStore(); // <-- Connect to the cart store
+  const { addToCart } = useCartStore();
 
-  // Determine if the current product is a favorite
   const isFavorite = favorites.some(fav => fav.id === product.id);
 
   const handleToggleFavorite = () => {
@@ -30,7 +26,7 @@ export default function ProductDetails({ product }: { product: Product }) {
   };
 
   const handleAddToCart = () => {
-    addToCart(product); // <-- Call the action from the cart store
+    addToCart(product);
     toast.success(`${product.title} has been added to your cart.`);
   };
 
@@ -51,6 +47,7 @@ export default function ProductDetails({ product }: { product: Product }) {
                 src={product.image}
                 alt={product.title}
                 fill
+                priority
                 className="object-contain"
                 sizes="(max-width: 768px) 100vw, 50vw"
               />

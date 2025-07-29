@@ -1,4 +1,3 @@
-// src/store/cartStore.ts
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { Product } from '@/types';
@@ -11,10 +10,9 @@ interface CartState {
   items: CartItem[];
   addToCart: (product: Product) => void;
   removeFromCart: (productId: number) => void;
-  increaseQuantity: (productId: number) => void; // <-- New
-  decreaseQuantity: (productId: number) => void; // <-- New
+  increaseQuantity: (productId: number) => void;
+  decreaseQuantity: (productId: number) => void;
   clearCart: () => void;
-  // New Selectors (getters)
   getTotalItems: () => number;
   getTotalPrice: () => number;
 }
@@ -51,10 +49,9 @@ export const useCartStore = create<CartState>()(
             .map((item) =>
               item.id === productId ? { ...item, quantity: item.quantity - 1 } : item
             )
-            .filter((item) => item.quantity > 0), // Remove item if quantity is 0
+            .filter((item) => item.quantity > 0),
         })),
       clearCart: () => set({ items: [] }),
-      // Add the getter implementations
       getTotalItems: () => {
         return get().items.reduce((total, item) => total + item.quantity, 0);
       },

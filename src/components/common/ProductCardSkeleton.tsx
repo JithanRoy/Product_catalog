@@ -1,4 +1,3 @@
-// src/components/common/ProductCardSkeleton.tsx
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 

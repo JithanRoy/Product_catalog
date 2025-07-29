@@ -1,4 +1,3 @@
-// src/components/common/ProductCard.tsx
 'use client';
 
 import Image from 'next/image';
@@ -6,23 +5,19 @@ import Link from 'next/link';
 import { toast } from 'sonner';
 import { Product } from '@/types';
 
-// State Management
 import { useFavoritesStore } from '@/store/favouritesStore';
 import { useCartStore } from '@/store/cartStore';
 
-// UI Components
 import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-// Icons
 import { Heart, ShoppingCart, Star } from 'lucide-react';
 
 export default function ProductCard({ product }: { product: Product }) {
-  // Connect to the state stores
+
   const { favorites, addToFavorites, removeFromFavorites } = useFavoritesStore();
   const { addToCart } = useCartStore();
 
-  // Check if the current product is in favorites
   const isFavorite = favorites.some((fav) => fav.id === product.id);
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
@@ -33,7 +28,7 @@ export default function ProductCard({ product }: { product: Product }) {
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card click
+    e.stopPropagation();
     addToCart(product);
     toast.success(`${product.title} has been added to your cart.`);
   };
@@ -46,6 +41,7 @@ export default function ProductCard({ product }: { product: Product }) {
             src={product.image}
             alt={product.title}
             fill
+            priority
             className="object-contain group-hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 768px) 100vw, 33vw"
           />
@@ -94,7 +90,6 @@ export default function ProductCard({ product }: { product: Product }) {
       </CardContent>
       <CardFooter className="p-4 pt-0">
         <Button asChild className="w-full" variant="outline">
-          {/* Ensure you use Next.js's Link component correctly */}
           <Link href={`/products/${product.id}`}>View Details</Link>
         </Button>
       </CardFooter>
